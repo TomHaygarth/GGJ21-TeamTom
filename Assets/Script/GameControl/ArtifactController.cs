@@ -5,7 +5,7 @@ using UnityEngine;
 public class ArtifactController : MonoBehaviour
 {
     [SerializeField]
-    List<ArtifactItemData> m_Artifacts;
+    private List<ArtifactItemData> m_Artifacts;
 
     public ArtifactItemData CreateNewArtifact(Rect area, float y_pos = 0.0f)
     {
@@ -20,7 +20,7 @@ public class ArtifactController : MonoBehaviour
 
         ArtifactItemData new_artifact = Instantiate<ArtifactItemData>(m_Artifacts[rand_idx],
                                                                       new Vector3(x_pos, y_pos, z_pos),
-                                                                      false);
+                                                                      Quaternion.identity);
 
         return new_artifact;
     }
