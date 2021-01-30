@@ -24,6 +24,7 @@ public class PlayerMovementController : MonoBehaviour
 
     private Vector2 m_inputMovementAxis = new Vector2();
     private Transform m_cachedTransform = null;
+    private Vector3 m_lookDirection = new Vector3();
 
     private float CalculateFixedVelocityDelta()
     {
@@ -130,6 +131,16 @@ public class PlayerMovementController : MonoBehaviour
         m_currentVelocity.y = 0.0f; // for sanity let's just make sure y is always 0
         update_position |= UpdateVelocityForAxis(ref m_currentVelocity.z, m_inputMovementAxis.y);
 
+        // only update our look direction if the input is changing
+        if (m_inputMovementAxis.x < -m_inputMap.DirectionDeadzone
+         || m_inputMovementAxis.x > m_inputMap.DirectionDeadzone
+         || m_inputMovementAxis.y < -m_inputMap.DirectionDeadzone
+         || m_inputMovementAxis.y > m_inputMap.DirectionDeadzone)
+        {
+            m_lookDirection.x = m_inputMovementAxis.x;
+            m_lookDirection.y = 0.0f;
+            m_lookDirection.z = m_inputMovementAxis.y;
+        }
 
         if (update_position == true)
         {
@@ -137,7 +148,9 @@ public class PlayerMovementController : MonoBehaviour
             Vector3 norm_velocity = m_currentVelocity.normalized;
 
             //float rotation_y = Vector3.Angle(Vector3.forward, norm_velocity);
-            m_cachedTransform.rotation = Quaternion.LookRotation(norm_velocity, Vector3.up);
+            Vector3 look_direction = m_lookDirection.normalized;
+
+            m_cachedTransform.rotation = Quaternion.LookRotation(look_direction, Vector3.up);
 
             norm_velocity.x = Mathf.Abs(norm_velocity.x);
             norm_velocity.y = 0.0f; // for sanity let's just make sure y is always 0
