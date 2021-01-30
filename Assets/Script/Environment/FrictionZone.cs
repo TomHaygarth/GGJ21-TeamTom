@@ -7,6 +7,9 @@ public class FrictionZone : MonoBehaviour
     [SerializeField]
     private float m_coefficient = 1.0f;
 
+    [SerializeField]
+    private float m_maxSpeed = 5.0f;
+
     // Start is called before the first frame update
     void OnTriggerEnter(Collider col)
     {
@@ -14,6 +17,7 @@ public class FrictionZone : MonoBehaviour
         if (player != null)
         {
             player.PushFrictionCoefficient(m_coefficient);
+            player.PushSpeedCap(m_maxSpeed);
         }
     }
 
@@ -24,6 +28,7 @@ public class FrictionZone : MonoBehaviour
         if (player != null)
         {
             player.PopFrictionCoefficient();
+            player.PopSpeedCap();
         }
     }
 }

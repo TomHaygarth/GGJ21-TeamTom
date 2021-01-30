@@ -10,10 +10,6 @@ public class PlayerMovementController : MonoBehaviour
     [SerializeField]
     private float m_maxVelocity = 10.0f;
 
-    // should be
-    //[SerializeField]
-    //private float m_velocityDecay = 0.25f;
-
     [SerializeField]
     private float m_minVelocityDeadzone = 0.01f;
 
@@ -32,6 +28,7 @@ public class PlayerMovementController : MonoBehaviour
     private Vector3 m_lookDirection = new Vector3();
 
     Stack<float> m_frictionStack = new Stack<float>();
+    Stack<float> m_speedCapStack = new Stack<float>();
 
     [SerializeField]
     float m_currentSpeed = 0.0f;
@@ -47,29 +44,46 @@ public class PlayerMovementController : MonoBehaviour
     public void PopFrictionCoefficient()
     {
         // make sure the original coeeficient is never lost
-        if (m_frictionStack.Count > 1)
+        if (m_frictionStack.Count > 0)
         {
             m_frictionStack.Pop();
+        }
+    }
+
+    public void PushSpeedCap(float speed)
+    {
+        m_speedCapStack.Push(speed);
+    }
+
+    public void PopSpeedCap()
+    {
+        // make sure the original coeeficient is never lost
+        if (m_speedCapStack.Count > 0)
+        {
+            m_speedCapStack.Pop();
         }
     }
 
     // Private functions
     private float CalculateFixedVelocityDelta()
     {
-        return m_maxVelocity * m_frictionStack.Peek() * Time.smoothDeltaTime;
+        float friction_coefficient = m_frictionStack.Count > 0 ? m_frictionStack.Peek() : m_frictionCoefficient;
+        float max_velocity = m_speedCapStack.Count > 0 ? m_speedCapStack.Peek() : m_maxVelocity;
+        return max_velocity * friction_coefficient * Time.smoothDeltaTime;
     }
 
     private bool UpdateVelocityForAxis(ref float velocity_axis, float input_axis)
     {
         bool is_moving = false;
         float clamp_scalar = Mathf.Abs(input_axis);
+        float max_velocity = m_speedCapStack.Count > 0 ? m_speedCapStack.Peek() : m_maxVelocity;
 
         // If we're pressing up/right
         if (input_axis > m_inputMap.DirectionDeadzone)
         {
             float velocity_delta = CalculateFixedVelocityDelta();
             velocity_axis += velocity_delta;
-            velocity_axis = Mathf.Clamp(velocity_axis, -m_maxVelocity * clamp_scalar, m_maxVelocity * clamp_scalar);
+            velocity_axis = Mathf.Clamp(velocity_axis, -max_velocity * clamp_scalar, max_velocity * clamp_scalar);
             is_moving = true;
         }
         // if we're pressing down
@@ -77,7 +91,7 @@ public class PlayerMovementController : MonoBehaviour
         {
             float velocity_delta = CalculateFixedVelocityDelta();
             velocity_axis -= velocity_delta;
-            velocity_axis = Mathf.Clamp(velocity_axis, -m_maxVelocity * clamp_scalar, m_maxVelocity * clamp_scalar);
+            velocity_axis = Mathf.Clamp(velocity_axis, -max_velocity * clamp_scalar, max_velocity * clamp_scalar);
             is_moving = true;
         }
         // decay the vertical velocity toward's 0
@@ -120,7 +134,6 @@ public class PlayerMovementController : MonoBehaviour
         // under the hood but this article seems to suggest it might http://blog.collectivemass.com/2019/06/unity-myth-buster-gameobject-transform-vs-cached-transform/
         m_cachedTransform = transform;
         m_cachedBody = GetComponent<Rigidbody>();
-        m_frictionStack.Push(m_frictionCoefficient);
 
         if(m_cachedBody != null)
         {
