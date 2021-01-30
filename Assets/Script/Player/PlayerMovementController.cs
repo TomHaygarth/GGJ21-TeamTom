@@ -8,7 +8,7 @@ public class PlayerMovementController : MonoBehaviour
     private int m_playerID = 0;
 
     [SerializeField]
-    private float m_maxVelocity = 1.0f;
+    private float m_maxVelocity = 10.0f;
 
     // should be
     //[SerializeField]
@@ -18,7 +18,7 @@ public class PlayerMovementController : MonoBehaviour
     private float m_minVelocityDeadzone = 0.01f;
 
     [SerializeField]
-    private float m_frictionCoefficient = 0.8f;
+    private float m_frictionCoefficient = 1.0f;
 
     [SerializeField]
     private Vector3 m_currentVelocity = new Vector3();
@@ -32,6 +32,11 @@ public class PlayerMovementController : MonoBehaviour
     private Vector3 m_lookDirection = new Vector3();
 
     Stack<float> m_frictionStack = new Stack<float>();
+
+    [SerializeField]
+    float m_currentSpeed = 0.0f;
+
+    public float CurrentSpeed { get { return m_currentSpeed; } }
 
     // Public functions
     public void PushFrictionCoefficient(float coefficient)
@@ -200,6 +205,9 @@ public class PlayerMovementController : MonoBehaviour
             {
                 m_cachedTransform.position += Vector3.Scale(norm_velocity, m_currentVelocity);
             }
+
+
+            m_currentSpeed = final_velocity.magnitude;
         }
     }
 }
