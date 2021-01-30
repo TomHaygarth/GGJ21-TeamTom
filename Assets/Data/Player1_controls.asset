@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UpKey: 119
   DownKey: 115
-  LeftKey: 301
+  LeftKey: 97
   RightKey: 100
   ScanKey: 32
   DigKey: 101
