@@ -30,15 +30,17 @@ public class PlayerMovementController : MonoBehaviour
         return m_maxVelocity * m_frictionCoefficient * Time.smoothDeltaTime;
     }
 
-    private void UpdateVelocityForAxis(ref float velocity_axis, float input_axis)
+    private bool UpdateVelocityForAxis(ref float velocity_axis, float input_axis)
     {
+        bool is_moving = false;
+
         // If we're pressing up/right
         if (input_axis > m_inputMap.DirectionDeadzone)
         {
             float velocity_delta = CalculateFixedVelocityDelta();
             velocity_axis += velocity_delta;
             velocity_axis = Mathf.Clamp(velocity_axis, -m_maxVelocity, m_maxVelocity);
-
+            is_moving = true;
         }
         // if we're pressing down
         else if (input_axis < -m_inputMap.DirectionDeadzone)
@@ -46,6 +48,7 @@ public class PlayerMovementController : MonoBehaviour
             float velocity_delta = CalculateFixedVelocityDelta();
             velocity_axis -= velocity_delta;
             velocity_axis = Mathf.Clamp(velocity_axis, -m_maxVelocity, m_maxVelocity);
+            is_moving = true;
         }
         // if we've stopped pressing up or down
         else
@@ -55,6 +58,7 @@ public class PlayerMovementController : MonoBehaviour
             {
                 float velocity_delta = CalculateFixedVelocityDelta();
                 velocity_axis -= velocity_delta;
+                is_moving = true;
 
                 // for safety incase we overshoot and accidentally go negative
                 if (velocity_axis < 0.0f)
@@ -67,6 +71,7 @@ public class PlayerMovementController : MonoBehaviour
             {
                 float velocity_delta = CalculateFixedVelocityDelta();
                 velocity_axis += velocity_delta;
+                is_moving = true;
 
                 // for safety incase we overshoot and accidentally go positive
                 if (velocity_axis > 0.0f)
@@ -79,6 +84,7 @@ public class PlayerMovementController : MonoBehaviour
                 velocity_axis = 0.0f;
             }
         }
+        return is_moving;
     }
 
     private void Start()
@@ -118,13 +124,26 @@ public class PlayerMovementController : MonoBehaviour
             m_inputMovementAxis.x = 0.0f;
         }
 
-        UpdateVelocityForAxis(ref m_currentVelocity.x, m_inputMovementAxis.x);
+        bool update_position = false;
+
+        update_position |= UpdateVelocityForAxis(ref m_currentVelocity.x, m_inputMovementAxis.x);
         m_currentVelocity.y = 0.0f; // for sanity let's just make sure y is always 0
-        UpdateVelocityForAxis(ref m_currentVelocity.z, m_inputMovementAxis.y);
+        update_position |= UpdateVelocityForAxis(ref m_currentVelocity.z, m_inputMovementAxis.y);
 
-        // get normlised version of our current velocity
-        Vector3 norm_velocity = m_currentVelocity.normalized;
 
-        m_cachedTransform.position += Vector3.Scale(norm_velocity, m_currentVelocity);
+        if (update_position == true)
+        {
+            // get normlised version of our current velocity
+            Vector3 norm_velocity = m_currentVelocity.normalized;
+
+            //float rotation_y = Vector3.Angle(Vector3.forward, norm_velocity);
+            m_cachedTransform.rotation = Quaternion.LookRotation(norm_velocity, Vector3.up);
+
+            norm_velocity.x = Mathf.Abs(norm_velocity.x);
+            norm_velocity.y = 0.0f; // for sanity let's just make sure y is always 0
+            norm_velocity.z = Mathf.Abs(norm_velocity.z);
+
+            m_cachedTransform.position += Vector3.Scale(norm_velocity, m_currentVelocity);
+        }
     }
 }
