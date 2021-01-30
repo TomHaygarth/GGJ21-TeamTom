@@ -19,7 +19,7 @@ public class ArtifactController : MonoBehaviour
         int rand_idx = Random.Range(0, m_Artifacts.Count);
 
         ArtifactItemData new_artifact = Instantiate<ArtifactItemData>(m_Artifacts[rand_idx],
-                                                                      new Vector3(x_pos, y_pos, z_pos),
+                                                                      new Vector3(area.x + x_pos, y_pos, area.y + z_pos),
                                                                       Quaternion.identity);
 
         return new_artifact;
