@@ -13,8 +13,14 @@ public class GameController : MonoBehaviour
     [SerializeField]
     private ArtifactController m_artifactController = null;
 
+    //[SerializeField]
+    //private ScoreController m_scoreController = null;
+
     [SerializeField]
     private List<ArtifactItemData> m_spawnedArtifacts = new List<ArtifactItemData>();
+
+    [SerializeField]
+    private Transform m_collectedArtifactsRoot = null;
 
     private ArtifactItemType m_currentArtifact = ArtifactItemType.Dino;
 
@@ -26,6 +32,20 @@ public class GameController : MonoBehaviour
     private static GameController static_instance = null;
 
     public static GameController Instance() { return static_instance;  }
+
+    public void CollectedArtifact(ArtifactItemData artifact)
+    {
+        // m_scoreController.ScoreArtifact(artifact);
+
+        // remove the collected artifact fromour list
+        m_spawnedArtifacts.Remove(artifact);
+
+        // Add the artifact to our collected transform root
+        artifact.transform.SetParent(m_collectedArtifactsRoot, false);
+
+        // spawn new artifacts
+        SpawnArtifacts();
+    }
 
     private void Awake()
     {
@@ -43,7 +63,7 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SpawnInitialArtifacts();
+        SpawnArtifacts();
     }
 
     private void OnDestroy()
@@ -54,9 +74,9 @@ public class GameController : MonoBehaviour
         }
     }
 
-    private void SpawnInitialArtifacts()
+    private void SpawnArtifacts()
     {
-        for (int i = 0; i < m_maxArtifacts; ++i)
+        for (int i = m_spawnedArtifacts.Count; i < m_maxArtifacts; ++i)
         {
             ArtifactItemData artifact
                 = m_artifactController.CreateNewArtifact(m_spawnZone);
