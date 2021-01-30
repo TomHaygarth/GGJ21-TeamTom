@@ -13,7 +13,12 @@ public class GameController : MonoBehaviour
     [SerializeField]
     private ArtifactController m_artifactController = null;
 
+    [SerializeField]
     private List<ArtifactItemData> m_spawnedArtifacts = new List<ArtifactItemData>();
+
+    private ArtifactItemType m_currentArtifact = ArtifactItemType.Dino;
+
+    public ArtifactItemType CurrentArtifact { get { return m_currentArtifact; } }
 
     // A static instance that should only be set once per scene.
     // This will allow us to be able to access the game controller from anywhere
