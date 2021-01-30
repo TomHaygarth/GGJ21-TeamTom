@@ -15,6 +15,12 @@ public class GameController : MonoBehaviour
 
     private List<ArtifactItemData> m_spawnedArtifacts = new List<ArtifactItemData>();
 
+    private void Awake()
+    {
+        // Force a max target of 60fps
+        Application.targetFrameRate = 60;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
