@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameCrontroller : MonoBehaviour
+public class GameController : MonoBehaviour
 {
     [SerializeField]
     private int m_maxArtifacts = 8;
