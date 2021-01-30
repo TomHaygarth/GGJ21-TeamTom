@@ -14,4 +14,7 @@ public class InputMapping : ScriptableObject
     public KeyCode DigKey = KeyCode.E;
 
     public float DirectionDeadzone = 0.05f;
+
+    public string GamepadLeftstickHorizontal = "Gamepad_0_L_X";
+    public string GamepadLeftstickVertical = "Gamepad_0_L_Y";
 }

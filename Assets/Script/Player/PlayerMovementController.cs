@@ -10,6 +10,10 @@ public class PlayerMovementController : MonoBehaviour
     [SerializeField]
     private float m_maxVelocity = 1.0f;
 
+    // should be
+    //[SerializeField]
+    //private float m_velocityDecay = 0.25f;
+
     [SerializeField]
     private float m_minVelocityDeadzone = 0.01f;
 
@@ -24,23 +28,43 @@ public class PlayerMovementController : MonoBehaviour
 
     private Vector2 m_inputMovementAxis = new Vector2();
     private Transform m_cachedTransform = null;
+    private Rigidbody m_cachedBody = null;
     private Vector3 m_lookDirection = new Vector3();
 
+    Stack<float> m_frictionStack = new Stack<float>();
+
+    // Public functions
+    public void PushFrictionCoefficient(float coefficient)
+    {
+        m_frictionStack.Push(coefficient);
+    }
+
+    public void PopFrictionCoefficient()
+    {
+        // make sure the original coeeficient is never lost
+        if (m_frictionStack.Count > 1)
+        {
+            m_frictionStack.Pop();
+        }
+    }
+
+    // Private functions
     private float CalculateFixedVelocityDelta()
     {
-        return m_maxVelocity * m_frictionCoefficient * Time.smoothDeltaTime;
+        return m_maxVelocity * m_frictionStack.Peek() * Time.smoothDeltaTime;
     }
 
     private bool UpdateVelocityForAxis(ref float velocity_axis, float input_axis)
     {
         bool is_moving = false;
+        float clamp_scalar = Mathf.Abs(input_axis);
 
         // If we're pressing up/right
         if (input_axis > m_inputMap.DirectionDeadzone)
         {
             float velocity_delta = CalculateFixedVelocityDelta();
             velocity_axis += velocity_delta;
-            velocity_axis = Mathf.Clamp(velocity_axis, -m_maxVelocity, m_maxVelocity);
+            velocity_axis = Mathf.Clamp(velocity_axis, -m_maxVelocity * clamp_scalar, m_maxVelocity * clamp_scalar);
             is_moving = true;
         }
         // if we're pressing down
@@ -48,42 +72,38 @@ public class PlayerMovementController : MonoBehaviour
         {
             float velocity_delta = CalculateFixedVelocityDelta();
             velocity_axis -= velocity_delta;
-            velocity_axis = Mathf.Clamp(velocity_axis, -m_maxVelocity, m_maxVelocity);
+            velocity_axis = Mathf.Clamp(velocity_axis, -m_maxVelocity * clamp_scalar, m_maxVelocity * clamp_scalar);
             is_moving = true;
         }
-        // if we've stopped pressing up or down
-        else
+        // decay the vertical velocity toward's 0
+        if (velocity_axis > m_minVelocityDeadzone)
         {
-            // decay the vertical velocity toward's 0
-            if (velocity_axis > m_minVelocityDeadzone)
-            {
-                float velocity_delta = CalculateFixedVelocityDelta();
-                velocity_axis -= velocity_delta;
-                is_moving = true;
+            float velocity_delta = CalculateFixedVelocityDelta();
+            velocity_axis -= velocity_delta * (1.0f - Mathf.Abs(input_axis));
+            is_moving = true;
 
-                // for safety incase we overshoot and accidentally go negative
-                if (velocity_axis < 0.0f)
-                {
-                    velocity_axis = 0.0f;
-                }
-
-            }
-            else if (velocity_axis < -m_minVelocityDeadzone)
-            {
-                float velocity_delta = CalculateFixedVelocityDelta();
-                velocity_axis += velocity_delta;
-                is_moving = true;
-
-                // for safety incase we overshoot and accidentally go positive
-                if (velocity_axis > 0.0f)
-                {
-                    velocity_axis = 0.0f;
-                }
-            }
-            else
+            // for safety incase we overshoot and accidentally go negative
+            if (velocity_axis < 0.0f)
             {
                 velocity_axis = 0.0f;
             }
+
+        }
+        else if (velocity_axis < -m_minVelocityDeadzone)
+        {
+            float velocity_delta = CalculateFixedVelocityDelta();
+            velocity_axis += velocity_delta * (1.0f - Mathf.Abs(input_axis));
+            is_moving = true;
+
+            // for safety incase we overshoot and accidentally go positive
+            if (velocity_axis > 0.0f)
+            {
+                velocity_axis = 0.0f;
+            }
+        }
+        else
+        {
+            velocity_axis = 0.0f;
         }
         return is_moving;
     }
@@ -94,6 +114,18 @@ public class PlayerMovementController : MonoBehaviour
         // I'm unsure if unity still doesn't cache this but calls GetComponent<Transform>()
         // under the hood but this article seems to suggest it might http://blog.collectivemass.com/2019/06/unity-myth-buster-gameobject-transform-vs-cached-transform/
         m_cachedTransform = transform;
+        m_cachedBody = GetComponent<Rigidbody>();
+        m_frictionStack.Push(m_frictionCoefficient);
+
+        if(m_cachedBody != null)
+        {
+            m_cachedBody.freezeRotation = true;
+            m_cachedBody.useGravity = false;
+            m_cachedBody.constraints = RigidbodyConstraints.FreezePositionY
+                                     | RigidbodyConstraints.FreezeRotationX
+                                     | RigidbodyConstraints.FreezeRotationY
+                                     | RigidbodyConstraints.FreezeRotationZ;
+        }
     }
 
     // Update is called once per frame
@@ -109,7 +141,8 @@ public class PlayerMovementController : MonoBehaviour
         }
         else
         {
-            m_inputMovementAxis.y = 0.0f;
+            // if no key is pressed check if they're using a gamepad instead
+            m_inputMovementAxis.y = Input.GetAxis(m_inputMap.GamepadLeftstickVertical);
         }
 
         if (Input.GetKey(m_inputMap.LeftKey) == true)
@@ -122,7 +155,8 @@ public class PlayerMovementController : MonoBehaviour
         }
         else
         {
-            m_inputMovementAxis.x = 0.0f;
+            // if no key is pressed check if they're using a gamepad instead
+            m_inputMovementAxis.x = Input.GetAxis(m_inputMap.GamepadLeftstickHorizontal);
         }
 
         bool update_position = false;
@@ -156,7 +190,16 @@ public class PlayerMovementController : MonoBehaviour
             norm_velocity.y = 0.0f; // for sanity let's just make sure y is always 0
             norm_velocity.z = Mathf.Abs(norm_velocity.z);
 
-            m_cachedTransform.position += Vector3.Scale(norm_velocity, m_currentVelocity);
+            Vector3 final_velocity = Vector3.Scale(norm_velocity, m_currentVelocity);
+
+            if (m_cachedBody != null)
+            {
+                m_cachedBody.velocity = final_velocity;
+            }
+            else
+            {
+                m_cachedTransform.position += Vector3.Scale(norm_velocity, m_currentVelocity);
+            }
         }
     }
 }
