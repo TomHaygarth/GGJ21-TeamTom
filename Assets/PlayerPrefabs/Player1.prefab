@@ -9761,7 +9761,7 @@ MonoBehaviour:
   m_maxVelocity: 10
   m_velocityDecay: 0.25
   m_minVelocityDeadzone: 0.01
-  m_frictionCoefficient: 1
+  m_frictionCoefficient: 2.5
   m_currentVelocity: {x: 0, y: 0, z: 0}
   m_inputMap: {fileID: 11400000, guid: 1f9c59c95bb334f99ae99e938c3fe0f1, type: 2}
   m_currentSpeed: 0
