@@ -5,42 +5,54 @@ using UnityEngine.UI;
 
 public class TimerController : MonoBehaviour
 {
-    [SerializeField]
-    float currentTime = 0f;
-    [SerializeField]
-    float startingTime = 20f;
+    public delegate void TimerFinished();
+    public event TimerFinished OnTimerFinished = delegate {};
 
-    [SerializeField] Text countdownText;
+    [SerializeField]
+    protected float currentTime = 0f;
+    [SerializeField]
+    protected float startingTime = 20f;
 
-    void Start()
+    [SerializeField]
+    bool m_isCounting = false;
+
+    protected void Start()
     {
         currentTime = startingTime;
     }
 
-    void Update()
+    public void StartTimer()
     {
+        currentTime = startingTime;
+        m_isCounting = true;
+    }
+
+    public void Pause()
+    {
+        m_isCounting = false;
+    }
+
+    public void Resume()
+    {
+        m_isCounting = true;
+    }
+
+    protected void Update()
+    {
+        if (m_isCounting == false)
+        {
+            return;
+        }
+
         currentTime -= 1 * Time.deltaTime;
-        countdownText.text = currentTime.ToString("0");
+        //countdownText.text = currentTime.ToString("0");
 
-        // just to prevent negative values
-        if (currentTime <= 0)
+        if (currentTime <= 0.0f)
         {
-            currentTime = 0;
+            currentTime = 0.0f;
+            m_isCounting = false;
+            OnTimerFinished();
         }
 
-        // making the color red when under 5 sec
-        if (currentTime <= 5)
-        {
-            countdownText.color = Color.red;
-        }
-
-
-        // Scene change or event pop when time reaches zero
-        /*
-        if (currentTime = 0)
-        {
-            SceneManager.NextScene
-        }
-        */
     }
 }

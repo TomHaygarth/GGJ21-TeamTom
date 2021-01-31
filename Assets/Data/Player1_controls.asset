@@ -16,6 +16,8 @@ MonoBehaviour:
   DownKey: 115
   LeftKey: 97
   RightKey: 100
-  ScanKey: 32
-  DigKey: 101
+  ScanKey: 101
+  DigKey: 32
   DirectionDeadzone: 0.05
+  GamepadLeftstickHorizontal: Gamepad_0_L_X
+  GamepadLeftstickVertical: Gamepad_0_L_Y

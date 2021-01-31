@@ -10,4 +10,10 @@ public class ArtifactItemData : MonoBehaviour
     private int m_CorrectItemScore = 100;
     [SerializeField]
     private int m_IncorrectItemScore = -100;
+
+    public ArtifactItemType ItemType { get { return m_ItemType; } }
+
+    [SerializeField]
+    private ArtifactDetectedVisualController m_detectedVisualController = null;
+    public ArtifactDetectedVisualController DetectedVisualController { get { return m_detectedVisualController; } }
 }
