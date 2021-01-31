@@ -13,6 +13,11 @@ public class ObjecScaleTimer : TimerController
     [SerializeField]
     private Vector3 m_scaleTo = new Vector3();
 
+    private void OnEnable()
+    {
+        m_TransformToScale.localScale = m_scaleFrom;
+    }
+
     protected new void Update()
     {
         base.Update();
