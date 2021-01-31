@@ -20,9 +20,9 @@ public class mainMenuNextScene : MonoBehaviour
         if (Input.GetKeyDown("space"))
         {
             print("space");
-            SceneManager.LoadScene("MainGame");
+            //SceneManager.LoadScene("MainGame");
             //setplayer=1
-            playerCount = 1;
+            //playerCount = 1;
         }
 
         if (Input.GetKeyDown("1"))
@@ -30,21 +30,22 @@ public class mainMenuNextScene : MonoBehaviour
             print("1");
             SceneManager.LoadScene("MainGame");
             //set playes =1
-            playerCount = 1;
+            //playerCount = 1;
         }
         if (Input.GetKeyDown("2"))
         {
             print("2");
-            SceneManager.LoadScene("MainGame");
+            //SceneManager.LoadScene("MainGame");
+            SceneManager.LoadScene("Level2");
             //set playes =2
-            playerCount = 2;
+            //playerCount = 2;
         }
         if (Input.GetKeyDown("3"))
         {
             print("3");
-            SceneManager.LoadScene("MainGame");
+            //SceneManager.LoadScene("MainGame");
             //set playes =2
-            playerCount = 3;
+            //playerCount = 3;
         }
     }
 //public void SetGamePlayerCount(int players)
