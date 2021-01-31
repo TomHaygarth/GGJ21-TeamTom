@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5234407371040957993}
   - component: {fileID: 6579370094008754496}
   - component: {fileID: 2749327670903406441}
+  - component: {fileID: -3911748285396017216}
   m_Layer: 0
   m_Name: roman1
   m_TagString: Untagged
@@ -109,3 +110,15 @@ MonoBehaviour:
   m_ItemType: 0
   m_CorrectItemScore: 100
   m_IncorrectItemScore: -100
+--- !u!114 &-3911748285396017216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1460334550426383100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13ed177cf63b32449ad45265d5958bc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

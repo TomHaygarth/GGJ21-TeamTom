@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 850168670064672454}
   - component: {fileID: 8724959194795951801}
   - component: {fileID: 9198661860835925090}
+  - component: {fileID: 3259715712288204101}
   m_Layer: 0
   m_Name: dino4
   m_TagString: Untagged
@@ -106,6 +107,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a9a172cd85b64a1a9cdf2314650448e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ItemType: 0
+  m_ItemType: 2
   m_CorrectItemScore: 10
   m_IncorrectItemScore: -10
+--- !u!114 &3259715712288204101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5760555819986267426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13ed177cf63b32449ad45265d5958bc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
