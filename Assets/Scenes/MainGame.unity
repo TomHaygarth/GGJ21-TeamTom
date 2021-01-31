@@ -7657,6 +7657,21 @@ PrefabInstance:
       propertyPath: camTransform
       value: 
       objectReference: {fileID: 1924878238}
+    - target: {fileID: 5580960406052424889, guid: 36b0d72e322574598b6d0cf6709a3048,
+        type: 3}
+      propertyPath: moveWithTransform
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5580960406052424889, guid: 36b0d72e322574598b6d0cf6709a3048,
+        type: 3}
+      propertyPath: InitialModule.maxNumParticles
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5580960406052424889, guid: 36b0d72e322574598b6d0cf6709a3048,
+        type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5580960407635781850, guid: 36b0d72e322574598b6d0cf6709a3048,
         type: 3}
       propertyPath: m_RootOrder
@@ -7716,6 +7731,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7118135399831087211, guid: 36b0d72e322574598b6d0cf6709a3048,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36b0d72e322574598b6d0cf6709a3048, type: 3}

@@ -13,12 +13,25 @@ public class playerAnim : MonoBehaviour
 
     void Start()
     {
-        //m_animator()
+        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        //m_animator.SetFloat("speed", m_movementController.CurrentSpeed);
+        m_animator.SetFloat("speed", m_movementController.CurrentSpeed);
+
+        if (Input.GetKeyDown("space"))
+        {
+            m_animator.SetTrigger("dig");
+        }
+        if (Input.GetKeyUp("space"))
+        {
+            m_animator.SetTrigger("stopdig");
+        }
+        //if dig == win
+        //m_animator.SetTrigger("windig");
     }
 }
