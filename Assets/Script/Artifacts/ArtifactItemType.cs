@@ -4,5 +4,8 @@ public enum ArtifactItemType
 {
     Roman,
     Egyptian,
-    Dino
+    Dino,
+
+    // Always makesure COUNT is the last element in this enum
+    COUNT
 }

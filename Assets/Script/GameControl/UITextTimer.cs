@@ -6,7 +6,10 @@ using UnityEngine.UI;
 public class UITextTimer : TimerController
 {
     [SerializeField]
-    Text m_text = null;
+    TMPro.TMP_Text m_text = null;
+
+    [SerializeField]
+    string m_prefix = "Time: ";
 
     // Update is called once per frame
     new void Update()
@@ -15,7 +18,8 @@ public class UITextTimer : TimerController
 
         if (m_text != null)
         {
-            m_text.text = TimeSpan.FromSeconds(currentTime).ToString(@"mm\\:ss");
+            var ts = TimeSpan.FromSeconds(currentTime);
+            m_text.text = string.Format("{0}{1:0}:{2:00}", m_prefix, ts.Minutes, ts.Seconds);
         }
     }
 }
