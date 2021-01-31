@@ -16,9 +16,6 @@ public class GameController : MonoBehaviour
     [SerializeField]
     private ArtifactController m_artifactController = null;
 
-    //[SerializeField]
-    //private ScoreController m_scoreController = null;
-
     [SerializeField]
     private List<ArtifactItemData> m_spawnedArtifacts = new List<ArtifactItemData>();
 
