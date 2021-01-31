@@ -59,7 +59,7 @@ public class ArtifactController : MonoBehaviour
             if (zone.HasArtifact == false)
             {
                 m_inactiveDigZones.Add(zone);
-                m_activeDigZones.RemoveAt(i);
+                m_activeDigZones.RemoveAt(i - 1);
             }
         }
     }

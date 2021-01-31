@@ -30,12 +30,14 @@ public class ArtifactDetectedVisualController : TimerController
     {
         m_originalMaterial = m_renderer.sharedMaterial;
         m_renderer.material = m_newMaterial;
+        m_renderer.enabled = true;
         StartTimer();
     }
 
     private void OnDisable()
     {
         m_renderer.sharedMaterial = m_originalMaterial;
+        m_renderer.enabled = false;
     }
 
     private void DisableGameObject()

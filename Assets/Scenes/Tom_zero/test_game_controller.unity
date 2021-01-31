@@ -349,16 +349,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player1
       objectReference: {fileID: 0}
-    - target: {fileID: 5580960407635781862, guid: 36b0d72e322574598b6d0cf6709a3048,
-        type: 3}
-      propertyPath: m_velocityDecay
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5580960407635781862, guid: 36b0d72e322574598b6d0cf6709a3048,
-        type: 3}
-      propertyPath: m_frictionCoefficient
-      value: 5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36b0d72e322574598b6d0cf6709a3048, type: 3}
 --- !u!1 &711164435
