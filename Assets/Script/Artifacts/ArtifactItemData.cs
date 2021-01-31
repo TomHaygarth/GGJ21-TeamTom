@@ -11,6 +11,8 @@ public class ArtifactItemData : MonoBehaviour
     [SerializeField]
     private int m_IncorrectItemScore = -100;
 
+    public int CorrectScore { get { return m_CorrectItemScore; } }
+    public int IncorrectScore { get { return m_IncorrectItemScore; } }
     public ArtifactItemType ItemType { get { return m_ItemType; } }
 
     [SerializeField]

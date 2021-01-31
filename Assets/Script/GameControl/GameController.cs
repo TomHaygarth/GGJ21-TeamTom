@@ -14,9 +14,6 @@ public class GameController : MonoBehaviour
     private int m_maxArtifacts = 8;
 
     [SerializeField]
-    private Rect m_spawnZone;
-
-    [SerializeField]
     private ArtifactController m_artifactController = null;
 
     //[SerializeField]
@@ -40,6 +37,8 @@ public class GameController : MonoBehaviour
     [SerializeField]
     private int m_levelScore = 0;
 
+    public int LevelScore { get { return m_levelScore; } }
+
     [SerializeField]
     private bool m_StartGameOnLoad = false;
 
@@ -50,6 +49,8 @@ public class GameController : MonoBehaviour
     private TimerController m_artifactTypeRequestTimer = null;
     [SerializeField]
     private TimerController m_levelTimer = null;
+
+    bool m_isPlaying = false;
 
     private ArtifactItemType m_currentArtifactRequest = ArtifactItemType.Dino;
 
@@ -64,6 +65,7 @@ public class GameController : MonoBehaviour
 
     public void StartNewGame()
     {
+        m_isPlaying = true;
         m_levelScore = 0;
         m_levelTimer.StartTimer();
         RollNewArtefactType();
@@ -71,6 +73,15 @@ public class GameController : MonoBehaviour
 
     public void CollectedArtifact(ArtifactItemData artifact)
     {
+        if (artifact.ItemType == m_currentArtifactRequest)
+        {
+            m_levelScore += artifact.CorrectScore;
+        }
+        else
+        {
+            m_levelScore += artifact.IncorrectScore;
+        }
+
         // remove the collected artifact fromour list
         m_spawnedArtifacts.Remove(artifact);
 
@@ -121,6 +132,11 @@ public class GameController : MonoBehaviour
 
     private void RollNewArtefactType()
     {
+        if (m_isPlaying == false)
+        {
+            return;
+        }
+
         if (m_rollOnlyArtifactTypesSpawned == true && m_spawnedArtifacts.Count > 0)
         {
             int rand_idx = Random.Range(0, m_spawnedArtifacts.Count);
@@ -154,6 +170,9 @@ public class GameController : MonoBehaviour
         yield return new WaitForEndOfFrame();
         SpawnArtifacts();
 
+        m_artifactTypeRequestTimer.OnTimerFinished += RollNewArtefactType;
+        m_levelTimer.OnTimerFinished += LevelFinished;
+
         if (m_StartGameOnLoad == true)
         {
             StartNewGame();
@@ -173,9 +192,16 @@ public class GameController : MonoBehaviour
         for (int i = m_spawnedArtifacts.Count; i < m_maxArtifacts; ++i)
         {
             ArtifactItemData artifact
-                = m_artifactController.CreateNewArtifact(m_spawnZone);
+                = m_artifactController.CreateNewArtifact();
 
             m_spawnedArtifacts.Add(artifact);
         }
+    }
+
+    private void LevelFinished()
+    {
+        m_isPlaying = false;
+        m_artifactTypeRequestTimer.Pause();
+        OnLevelEnd();
     }
 }

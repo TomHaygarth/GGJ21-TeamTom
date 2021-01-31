@@ -13,15 +13,12 @@ public class ArtifactController : MonoBehaviour
     [SerializeField]
     private List<DigZone> m_activeDigZones = new List<DigZone>();
 
-    public ArtifactItemData CreateNewArtifact(Rect area, float y_pos = 0.0f)
+    public ArtifactItemData CreateNewArtifact()
     {
         if (m_Artifacts.Count == 0 && m_inactiveDigZones.Count > 0)
         {
             return null;
         }
-
-        float x_pos = Random.Range(0.0f, area.width);
-        float z_pos = Random.Range(0.0f, area.width);
 
         int rand_artifact_idx = Random.Range(0, m_Artifacts.Count);
         int rand_zone_idx = Random.Range(0, m_inactiveDigZones.Count);
