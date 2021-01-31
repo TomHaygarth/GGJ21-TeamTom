@@ -8152,7 +8152,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Space to see instructions
+  m_text: Hold Space to see instructions
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -8179,8 +8179,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 13.18
-  m_fontSizeBase: 13.18
+  m_fontSize: 11.72
+  m_fontSizeBase: 11.72
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -10046,6 +10046,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_movementController: {fileID: 5580960406564983912}
+  m_digController: {fileID: 0}
   m_animator: {fileID: 5580960406917389005}
 --- !u!1 &732870398
 GameObject:
@@ -22575,6 +22576,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_movementController: {fileID: 5580960407748506632}
+  m_digController: {fileID: 0}
   m_animator: {fileID: 5580960407530093229}
 --- !u!114 &1828737617
 MonoBehaviour:
@@ -22589,6 +22591,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_movementController: {fileID: 5580960407670553339}
+  m_digController: {fileID: 0}
   m_animator: {fileID: 5580960407889065054}
 --- !u!1 &1854361557
 GameObject:
@@ -23041,6 +23044,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_movementController: {fileID: 5580960407748506632}
+  m_digController: {fileID: 0}
   m_animator: {fileID: 5580960407530093229}
 --- !u!1 &1900479426
 GameObject:
