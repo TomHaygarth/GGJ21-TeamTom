@@ -223,7 +223,7 @@ MonoBehaviour:
   m_newMaterial: {fileID: 2100000, guid: 5c33c7286aa77486f9875c33d3eced52, type: 2}
   m_originalMaterial: {fileID: 0}
   m_renderer: {fileID: 2432569581150501525}
-  m_displayColor: {r: 0.3419811, g: 0.5, b: 0.40518865, a: 1}
+  m_displayColor: {r: 0.31181023, g: 0.8584906, b: 0.5251488, a: 1}
   m_alphaCurve:
     serializedVersion: 2
     m_Curve:
