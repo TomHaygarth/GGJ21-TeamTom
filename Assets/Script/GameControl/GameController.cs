@@ -7,6 +7,9 @@ public class GameController : MonoBehaviour
     public delegate void ArtifactTypeWantedChanged(ArtifactItemType type);
     public event ArtifactTypeWantedChanged OnArtifactTypeWantedChanged = delegate { };
 
+    public delegate void LevelEnd();
+    public event LevelEnd OnLevelEnd = delegate { };
+
     [SerializeField]
     private int m_maxArtifacts = 8;
 

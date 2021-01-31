@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2138984173079740110}
   - component: {fileID: 7893423422967560034}
   - component: {fileID: -8135282475361904881}
+  - component: {fileID: -5667388928719507475}
   m_Layer: 0
   m_Name: egyption4
   m_TagString: Untagged
@@ -93,7 +94,7 @@ BoxCollider:
   m_GameObject: {fileID: 1189797243993483440}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 0.0046700104, y: 0.0013543178, z: 0.0099597955}
   m_Center: {x: 1.0238945e-12, y: 0.0000000022955424, z: 0.00054968987}
@@ -143,7 +144,7 @@ MonoBehaviour:
   m_newMaterial: {fileID: 2100000, guid: 5c33c7286aa77486f9875c33d3eced52, type: 2}
   m_originalMaterial: {fileID: 0}
   m_renderer: {fileID: 7081809364383552946}
-  m_displayColor: {r: 1, g: 0.9263606, b: 0, a: 1}
+  m_displayColor: {r: 0.7490196, g: 0.6156863, b: 0.2509804, a: 1}
   m_alphaCurve:
     serializedVersion: 2
     m_Curve:
@@ -177,6 +178,22 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!54 &-5667388928719507475
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1189797243993483440}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &8419372621673016139
 GameObject:
   m_ObjectHideFlags: 0
