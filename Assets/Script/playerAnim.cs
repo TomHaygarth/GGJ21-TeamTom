@@ -23,10 +23,12 @@ public class playerAnim : MonoBehaviour
         //m_animator.SetFloat("speed", m_movementController.CurrentSpeed);
         m_animator.SetFloat("speed", m_movementController.CurrentSpeed);
 
+
+        //LinkedList this to is digging
         if (Input.GetKeyDown("space"))
         {
             m_animator.SetTrigger("dig");
-        }
+        }//else is not rigging
         if (Input.GetKeyUp("space"))
         {
             m_animator.SetTrigger("stopdig");
