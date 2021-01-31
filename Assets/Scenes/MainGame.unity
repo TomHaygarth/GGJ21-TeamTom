@@ -26294,6 +26294,11 @@ PrefabInstance:
       objectReference: {fileID: 1196561155}
     - target: {fileID: 3408015623927013664, guid: 1440994c19ae643fe9336bb438dbde7f,
         type: 3}
+      propertyPath: m_maxArtifacts
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3408015623927013664, guid: 1440994c19ae643fe9336bb438dbde7f,
+        type: 3}
       propertyPath: m_artifactController
       value: 
       objectReference: {fileID: 1927577911}
