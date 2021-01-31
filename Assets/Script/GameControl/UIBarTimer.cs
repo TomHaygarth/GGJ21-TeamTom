@@ -9,7 +9,7 @@ public class UIBarTimer : TimerController
     Image m_fillBar = null;
     
     // Update is called once per frame
-    new void Update()
+    protected new void Update()
     {
         base.Update();
 
