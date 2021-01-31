@@ -10456,6 +10456,8 @@ GameObject:
   - component: {fileID: 5580960407635781862}
   - component: {fileID: 5580960407635781861}
   - component: {fileID: 1797177420}
+  - component: {fileID: 893547032669564044}
+  - component: {fileID: 4602589541414606704}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Untagged
@@ -10563,6 +10565,7 @@ MonoBehaviour:
   m_currentVelocity: {x: 0, y: 0, z: 0}
   m_inputMap: {fileID: 11400000, guid: 1f9c59c95bb334f99ae99e938c3fe0f1, type: 2}
   m_currentSpeed: 0
+  m_movementPaused: 0
 --- !u!54 &5580960407635781861
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -10593,6 +10596,39 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_movementController: {fileID: 5580960407635781862}
   m_animator: {fileID: 5580960407987791427}
+--- !u!114 &893547032669564044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5580960407635781860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 921c957417ed24b36ade340ccd0843c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_digVisual: {fileID: 7118135399831087211}
+  m_digTimer: {fileID: 4602589541414606704}
+  m_movementController: {fileID: 5580960407635781862}
+--- !u!114 &4602589541414606704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5580960407635781860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f732fe983d80645b9879a6606b3c2061, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentTime: 0
+  startingTime: 5
+  m_isCounting: 0
+  m_TransformToScale: {fileID: 7568075999046023789}
+  m_scaleFrom: {x: 20, y: 20, z: 20}
+  m_scaleTo: {x: 220, y: 220, z: 220}
 --- !u!1 &5580960407752408205
 GameObject:
   m_ObjectHideFlags: 0
@@ -15526,6 +15562,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a3d6b3cc9b7b55d42869a14b2119fb2e, type: 3}
+--- !u!1 &7118135399831087211 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3067017342534751205, guid: a3d6b3cc9b7b55d42869a14b2119fb2e,
+    type: 3}
+  m_PrefabInstance: {fileID: 5213073159828257678}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7568075999046023789 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2404846803467076067, guid: a3d6b3cc9b7b55d42869a14b2119fb2e,

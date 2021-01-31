@@ -22,6 +22,9 @@ public class PlayerMovementController : MonoBehaviour
     [SerializeField]
     private InputMapping m_inputMap = null;
 
+    // Hack! but we need a place to grab the input map for the player for use in the dig controller
+    public InputMapping Controls { get { return m_inputMap; } }
+
     private Vector2 m_inputMovementAxis = new Vector2();
     private Transform m_cachedTransform = null;
     private Rigidbody m_cachedBody = null;
@@ -32,6 +35,9 @@ public class PlayerMovementController : MonoBehaviour
 
     [SerializeField]
     float m_currentSpeed = 0.0f;
+
+    [SerializeField]
+    private bool m_movementPaused = false;
 
     public float CurrentSpeed { get { return m_currentSpeed; } }
 
@@ -62,6 +68,19 @@ public class PlayerMovementController : MonoBehaviour
         {
             m_speedCapStack.Pop();
         }
+    }
+
+    public void PausePlayerpMovement()
+    {
+        m_movementPaused = true;
+        m_currentVelocity = Vector3.zero;
+        m_cachedBody.velocity = Vector3.zero;
+        m_currentSpeed = 0.0f;
+    }
+
+    public void ResumePlayerpMovement()
+    {
+        m_movementPaused = false;
     }
 
     // Private functions
@@ -149,6 +168,11 @@ public class PlayerMovementController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (m_movementPaused == true)
+        {
+            return;
+        }
+
         if (Input.GetKey(m_inputMap.UpKey) == true)
         {
             m_inputMovementAxis.y = 1.0f;
