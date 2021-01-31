@@ -19,6 +19,12 @@ public class ArtifactDropper : MonoBehaviour
         foreach (var body in bodies)
         {
             body.isKinematic = false;
+
+            var cols = body.GetComponentsInChildren<Collider>(true);
+            foreach (var col in cols)
+            {
+                col.enabled = true;
+            }
         }
     }
 }
