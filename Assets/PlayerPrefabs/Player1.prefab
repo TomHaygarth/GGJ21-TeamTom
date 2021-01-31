@@ -10595,6 +10595,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_movementController: {fileID: 5580960407635781862}
+  m_digController: {fileID: 893547032669564044}
   m_animator: {fileID: 5580960407987791427}
 --- !u!114 &893547032669564044
 MonoBehaviour:
@@ -15941,15 +15942,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 27b90083971f7da4f8cbcbc67aea130e, type: 3}
---- !u!4 &5402407049533261772 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 27b90083971f7da4f8cbcbc67aea130e,
-    type: 3}
-  m_PrefabInstance: {fileID: 5580960407486619687}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &4734097096176524662 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 27b90083971f7da4f8cbcbc67aea130e,
+    type: 3}
+  m_PrefabInstance: {fileID: 5580960407486619687}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5402407049533261772 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 27b90083971f7da4f8cbcbc67aea130e,
     type: 3}
   m_PrefabInstance: {fileID: 5580960407486619687}
   m_PrefabAsset: {fileID: 0}

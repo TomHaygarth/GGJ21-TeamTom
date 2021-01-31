@@ -17,6 +17,8 @@ public class PlayerDigController : MonoBehaviour
 
     private bool m_isDigging = false;
 
+    public bool IsDigging { get { return m_isDigging; } }
+
     private void Start()
     {
         m_digTimer.OnTimerFinished += CompleteDig;
