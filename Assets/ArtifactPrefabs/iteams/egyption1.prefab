@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6172728873819237758}
   - component: {fileID: 3933826266318412621}
   - component: {fileID: -6662284675059310071}
+  - component: {fileID: -2158820666540038649}
   m_Layer: 0
   m_Name: egyption1
   m_TagString: Untagged
@@ -110,6 +111,7 @@ MonoBehaviour:
   m_ItemType: 1
   m_CorrectItemScore: 100
   m_IncorrectItemScore: -100
+  m_detectedVisualController: {fileID: -2158820666540038649}
 --- !u!114 &-6662284675059310071
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,3 +124,55 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13ed177cf63b32449ad45265d5958bc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-2158820666540038649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1113399695158463591}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a2a2193db8da4fcd990fc1e04da8c4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentTime: 0
+  startingTime: 5
+  m_isCounting: 0
+  m_newMaterial: {fileID: 2100000, guid: 5c33c7286aa77486f9875c33d3eced52, type: 2}
+  m_originalMaterial: {fileID: 0}
+  m_renderer: {fileID: 324198592333802591}
+  m_displayColor: {r: 1, g: 1, b: 1, a: 1}
+  m_alphaCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.5
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

@@ -41,6 +41,15 @@ public class DigZone : MonoBehaviour
         {
             player.SetDigZone(this);
         }
+        else if (HasArtifact == true)
+        {
+            ArtifactDetector detector = col.GetComponent<ArtifactDetector>();
+            if(detector != null)
+            {
+                Debug.Log("Enabling Detected visual");
+                m_artifact.DetectedVisualController.enabled = true;
+            }
+        }
     }
 
     // Update is called once per frame

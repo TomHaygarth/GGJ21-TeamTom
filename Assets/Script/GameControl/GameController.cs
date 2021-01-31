@@ -20,6 +20,15 @@ public class GameController : MonoBehaviour
     private List<ArtifactItemData> m_spawnedArtifacts = new List<ArtifactItemData>();
 
     [SerializeField]
+    private ArtifactDetector m_baseArtifactDetector = null;
+
+    [SerializeField]
+    private List<ArtifactDetector> m_artifactDetectors = new List<ArtifactDetector>();
+
+    [SerializeField]
+    private Transform m_ArtifactDetectorsRoot = null;
+
+    [SerializeField]
     private Transform m_collectedArtifactsRoot = null;
 
     private ArtifactItemType m_currentArtifact = ArtifactItemType.Dino;
@@ -43,6 +52,9 @@ public class GameController : MonoBehaviour
         // Add the artifact to our collected transform root
         artifact.transform.SetParent(m_collectedArtifactsRoot, false);
 
+        // refresh artifact controller
+        m_artifactController.RefreshActiveDigZones();
+
         // spawn new artifacts
         SpawnArtifacts();
     }
@@ -50,6 +62,30 @@ public class GameController : MonoBehaviour
     public void RegisterDigZone(DigZone zone)
     {
         m_artifactController.RegisterDigZone(zone);
+    }
+
+    public void RequestArtifactDetectorTo(Vector3 pos)
+    {
+        ArtifactDetector next_available = null;
+
+        foreach(ArtifactDetector detector in m_artifactDetectors)
+        {
+            if (detector.gameObject.activeSelf == false)
+            {
+                next_available = detector;
+                break;
+            }
+        }
+
+        if (next_available == null)
+        {
+            next_available = Instantiate<ArtifactDetector>(m_baseArtifactDetector,
+                                                           m_ArtifactDetectorsRoot,
+                                                           false);
+            m_artifactDetectors.Add(next_available);
+        }
+
+        next_available.SetPosition(pos);
     }
 
     private void Awake()

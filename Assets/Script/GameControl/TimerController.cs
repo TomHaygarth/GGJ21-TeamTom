@@ -50,8 +50,8 @@ public class TimerController : MonoBehaviour
         if (currentTime <= 0.0f)
         {
             currentTime = 0.0f;
-            OnTimerFinished();
             m_isCounting = false;
+            OnTimerFinished();
         }
 
     }
