@@ -47,6 +47,11 @@ public class GameController : MonoBehaviour
         SpawnArtifacts();
     }
 
+    public void RegisterDigZone(DigZone zone)
+    {
+        m_artifactController.RegisterDigZone(zone);
+    }
+
     private void Awake()
     {
         if (static_instance != null)
@@ -61,8 +66,9 @@ public class GameController : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    IEnumerator Start()
     {
+        yield return new WaitForEndOfFrame();
         SpawnArtifacts();
     }
 

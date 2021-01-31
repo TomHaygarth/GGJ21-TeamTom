@@ -8,28 +8,49 @@ public class DigZone : MonoBehaviour
     private Transform m_artifactSpawnPoint;
 
     public Transform ArtifactSpawnPoint { get { return m_artifactSpawnPoint; } }
+
+    private ArtifactItemData m_artifact = null;
+
+    public bool HasArtifact { get { return m_artifact != null; } }
+
+    public void GiveArtifact(ArtifactItemData artifact)
+    {
+        m_artifact = artifact;
+    }
+
+    public ArtifactItemData TakeArtifact()
+    {
+        ArtifactItemData artifact = m_artifact;
+        m_artifact = null;
+        return artifact;
+    }
+
     private void Start()
     {
         Renderer mesh_renderer = GetComponent<Renderer>();
         mesh_renderer.enabled = false;
+
+        GameController.Instance().RegisterDigZone(this);
     }
 
     // Start is called before the first frame update
     void OnTriggerEnter(Collider col)
     {
-        PlayerMovementController player = col.GetComponent<PlayerMovementController>();
+        PlayerDigController player = col.GetComponent<PlayerDigController>();
         if (player != null)
         {
-            // 
+            player.SetDigZone(this);
         }
     }
 
     // Update is called once per frame
     void OnTriggerExit(Collider col)
     {
-        PlayerMovementController player = col.GetComponent<PlayerMovementController>();
-        if (player != null)
+        // if the player has just left our digzone and didn't enter another one in the meantime
+        PlayerDigController player = col.GetComponent<PlayerDigController>();
+        if (player != null && player.ActiveDigZone == this)
         {
+            player.SetDigZone(null);
         }
     }
 }
