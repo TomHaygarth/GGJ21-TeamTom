@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FrictionZone : MonoBehaviour
+public class FrictionZone : MonoBehaviour, IFrictionZone
 {
     [SerializeField]
     private float m_coefficient = 1.0f;
@@ -10,14 +10,17 @@ public class FrictionZone : MonoBehaviour
     [SerializeField]
     private float m_maxSpeed = 5.0f;
 
+    public float FrictionCoefficient { get { return m_coefficient; } }
+
+    public float SpeedCap { get { return m_maxSpeed; } }
+
     // Start is called before the first frame update
     void OnTriggerEnter(Collider col)
     {
         PlayerMovementController player = col.GetComponent<PlayerMovementController>();
         if (player != null)
         {
-            player.PushFrictionCoefficient(m_coefficient);
-            player.PushSpeedCap(m_maxSpeed);
+            player.AddFrictionZone(this);
         }
     }
 
@@ -27,8 +30,7 @@ public class FrictionZone : MonoBehaviour
         PlayerMovementController player = col.GetComponent<PlayerMovementController>();
         if (player != null)
         {
-            player.PopFrictionCoefficient();
-            player.PopSpeedCap();
+            player.RemoveFrictionZone(this);
         }
     }
 }

@@ -1,9 +1,17 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovementController : MonoBehaviour
 {
+    [Serializable]
+    private class DefaultFrictionZone : IFrictionZone
+    {
+        public float FrictionCoefficient { get; set; }
+
+        public float SpeedCap { get; set; }
+    }
+
     [SerializeField]
     private int m_playerID = 0;
 
@@ -30,8 +38,7 @@ public class PlayerMovementController : MonoBehaviour
     private Rigidbody m_cachedBody = null;
     private Vector3 m_lookDirection = new Vector3();
 
-    Stack<float> m_frictionStack = new Stack<float>();
-    Stack<float> m_speedCapStack = new Stack<float>();
+    List<IFrictionZone> m_frictionZones = new List<IFrictionZone>();
 
     [SerializeField]
     float m_currentSpeed = 0.0f;
@@ -39,35 +46,19 @@ public class PlayerMovementController : MonoBehaviour
     [SerializeField]
     private bool m_movementPaused = false;
 
+    private DefaultFrictionZone m_defaultFrictionZone = new DefaultFrictionZone();
+
     public float CurrentSpeed { get { return m_currentSpeed; } }
 
     // Public functions
-    public void PushFrictionCoefficient(float coefficient)
+    public void AddFrictionZone(IFrictionZone zone)
     {
-        m_frictionStack.Push(coefficient);
+        m_frictionZones.Add(zone);
     }
 
-    public void PopFrictionCoefficient()
+    public void RemoveFrictionZone(IFrictionZone zone)
     {
-        // make sure the original coeeficient is never lost
-        if (m_frictionStack.Count > 0)
-        {
-            m_frictionStack.Pop();
-        }
-    }
-
-    public void PushSpeedCap(float speed)
-    {
-        m_speedCapStack.Push(speed);
-    }
-
-    public void PopSpeedCap()
-    {
-        // make sure the original coeeficient is never lost
-        if (m_speedCapStack.Count > 0)
-        {
-            m_speedCapStack.Pop();
-        }
+        m_frictionZones.Remove(zone);
     }
 
     public void PausePlayerpMovement()
@@ -86,16 +77,16 @@ public class PlayerMovementController : MonoBehaviour
     // Private functions
     private float CalculateFixedVelocityDelta()
     {
-        float friction_coefficient = m_frictionStack.Count > 0 ? m_frictionStack.Peek() : m_frictionCoefficient;
-        float max_velocity = m_speedCapStack.Count > 0 ? m_speedCapStack.Peek() : m_maxVelocity;
-        return max_velocity * friction_coefficient * Time.smoothDeltaTime;
+        IFrictionZone zone = m_frictionZones[m_frictionZones.Count - 1];
+        return zone.SpeedCap * zone.FrictionCoefficient * Time.smoothDeltaTime;
     }
 
     private bool UpdateVelocityForAxis(ref float velocity_axis, float input_axis)
     {
         bool is_moving = false;
         float clamp_scalar = Mathf.Abs(input_axis);
-        float max_velocity = m_speedCapStack.Count > 0 ? m_speedCapStack.Peek() : m_maxVelocity;
+        IFrictionZone zone = m_frictionZones[m_frictionZones.Count - 1];
+        float max_velocity = zone.SpeedCap;
 
         // If we're pressing up/right
         if (input_axis > m_inputMap.DirectionDeadzone)
@@ -163,11 +154,19 @@ public class PlayerMovementController : MonoBehaviour
                                      | RigidbodyConstraints.FreezeRotationY
                                      | RigidbodyConstraints.FreezeRotationZ;
         }
+
+        m_defaultFrictionZone.FrictionCoefficient = m_frictionCoefficient;
+        m_defaultFrictionZone.SpeedCap = m_maxVelocity;
+        m_frictionZones.Add(m_defaultFrictionZone);
     }
 
     // Update is called once per frame
     void Update()
     {
+#if UNITY_EDITOR
+        m_defaultFrictionZone.FrictionCoefficient = m_frictionCoefficient;
+        m_defaultFrictionZone.SpeedCap = m_maxVelocity;
+#endif
         if (m_movementPaused == true)
         {
             return;
