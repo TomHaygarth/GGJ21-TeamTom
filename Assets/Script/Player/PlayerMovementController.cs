@@ -28,12 +28,11 @@ public class PlayerMovementController : MonoBehaviour
     private Vector3 m_currentVelocity = new Vector3();
 
     [SerializeField]
-    private InputMapping m_inputMap = null;
+    private IPlayerInputController m_input = null;
 
     // Hack! but we need a place to grab the input map for the player for use in the dig controller
-    public InputMapping Controls { get { return m_inputMap; } }
+    //public InputMapping Controls { get { return m_inputMap; } }
 
-    private Vector2 m_inputMovementAxis = new Vector2();
     private Transform m_cachedTransform = null;
     private Rigidbody m_cachedBody = null;
     private Vector3 m_lookDirection = new Vector3();
@@ -89,7 +88,7 @@ public class PlayerMovementController : MonoBehaviour
         float max_velocity = zone.SpeedCap;
 
         // If we're pressing up/right
-        if (input_axis > m_inputMap.DirectionDeadzone)
+        if (input_axis > m_input.DirectionDeadzone)
         {
             float velocity_delta = CalculateFixedVelocityDelta();
             velocity_axis += velocity_delta;
@@ -97,7 +96,7 @@ public class PlayerMovementController : MonoBehaviour
             is_moving = true;
         }
         // if we're pressing down
-        else if (input_axis < -m_inputMap.DirectionDeadzone)
+        else if (input_axis < -m_input.DirectionDeadzone)
         {
             float velocity_delta = CalculateFixedVelocityDelta();
             velocity_axis -= velocity_delta;
@@ -158,6 +157,8 @@ public class PlayerMovementController : MonoBehaviour
         m_defaultFrictionZone.FrictionCoefficient = m_frictionCoefficient;
         m_defaultFrictionZone.SpeedCap = m_maxVelocity;
         m_frictionZones.Add(m_defaultFrictionZone);
+
+        m_input = GetComponent<IPlayerInputController>();
     }
 
     // Update is called once per frame
@@ -172,49 +173,21 @@ public class PlayerMovementController : MonoBehaviour
             return;
         }
 
-        if (Input.GetKey(m_inputMap.UpKey) == true)
-        {
-            m_inputMovementAxis.y = 1.0f;
-        }
-        else if (Input.GetKey(m_inputMap.DownKey) == true)
-        {
-            m_inputMovementAxis.y = -1.0f;
-        }
-        else
-        {
-            // if no key is pressed check if they're using a gamepad instead
-            m_inputMovementAxis.y = Input.GetAxis(m_inputMap.GamepadLeftstickVertical);
-        }
-
-        if (Input.GetKey(m_inputMap.LeftKey) == true)
-        {
-            m_inputMovementAxis.x = -1.0f;
-        }
-        else if (Input.GetKey(m_inputMap.RightKey) == true)
-        {
-            m_inputMovementAxis.x = 1.0f;
-        }
-        else
-        {
-            // if no key is pressed check if they're using a gamepad instead
-            m_inputMovementAxis.x = Input.GetAxis(m_inputMap.GamepadLeftstickHorizontal);
-        }
-
         bool update_position = false;
 
-        update_position |= UpdateVelocityForAxis(ref m_currentVelocity.x, m_inputMovementAxis.x);
+        update_position |= UpdateVelocityForAxis(ref m_currentVelocity.x, m_input.MovementAxis.x);
         m_currentVelocity.y = 0.0f; // for sanity let's just make sure y is always 0
-        update_position |= UpdateVelocityForAxis(ref m_currentVelocity.z, m_inputMovementAxis.y);
+        update_position |= UpdateVelocityForAxis(ref m_currentVelocity.z, m_input.MovementAxis.y);
 
         // only update our look direction if the input is changing
-        if (m_inputMovementAxis.x < -m_inputMap.DirectionDeadzone
-         || m_inputMovementAxis.x > m_inputMap.DirectionDeadzone
-         || m_inputMovementAxis.y < -m_inputMap.DirectionDeadzone
-         || m_inputMovementAxis.y > m_inputMap.DirectionDeadzone)
+        if (m_input.MovementAxis.x < -m_input.DirectionDeadzone
+         || m_input.MovementAxis.x > m_input.DirectionDeadzone
+         || m_input.MovementAxis.y < -m_input.DirectionDeadzone
+         || m_input.MovementAxis.y > m_input.DirectionDeadzone)
         {
-            m_lookDirection.x = m_inputMovementAxis.x;
+            m_lookDirection.x = m_input.MovementAxis.x;
             m_lookDirection.y = 0.0f;
-            m_lookDirection.z = m_inputMovementAxis.y;
+            m_lookDirection.z = m_input.MovementAxis.y;
         }
 
         if (update_position == true)

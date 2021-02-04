@@ -15,6 +15,9 @@ public class PlayerDigController : MonoBehaviour
     [SerializeField]
     private PlayerMovementController m_movementController = null;
 
+    [SerializeField]
+    private IPlayerInputController m_input = null;
+
     private bool m_isDigging = false;
 
     public bool IsDigging { get { return m_isDigging; } }
@@ -22,6 +25,7 @@ public class PlayerDigController : MonoBehaviour
     private void Start()
     {
         m_digTimer.OnTimerFinished += CompleteDig;
+        m_input = GetComponent<IPlayerInputController>();
     }
 
     public DigZone ActiveDigZone { get { return m_activeDigZone; } }
@@ -37,7 +41,7 @@ public class PlayerDigController : MonoBehaviour
         if (m_isDigging == true)
         {
             // player has released the dig key so stop the dig early
-            if (Input.GetKeyUp(m_movementController.Controls.DigKey) == true)
+            if (m_input.DigReleased == true)
             {
                 EndDig();
             }
@@ -45,7 +49,7 @@ public class PlayerDigController : MonoBehaviour
             return;
         }
 
-        if (Input.GetKeyDown(m_movementController.Controls.DigKey) == true)
+        if (m_input.DigPressed == true)
         {
             StartDig();
         }
