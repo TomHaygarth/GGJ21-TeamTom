@@ -106,7 +106,7 @@ NavMeshSettings:
   m_BuildSettings:
     serializedVersion: 2
     agentTypeID: 0
-    agentRadius: 0.5
+    agentRadius: 1
     agentHeight: 2
     agentSlope: 45
     agentClimb: 0.4
@@ -114,13 +114,13 @@ NavMeshSettings:
     maxJumpAcrossDistance: 0
     minRegionArea: 2
     manualCellSize: 0
-    cellSize: 0.16666667
+    cellSize: 0.33333334
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: 1e975f17a95fd454f8b17fc8695b88fe, type: 2}
 --- !u!1 &11464003
 GameObject:
   m_ObjectHideFlags: 0
@@ -137,8 +137,8 @@ GameObject:
   m_Name: Cube.006 (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &11464004
 Transform:
@@ -165,7 +165,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.036201764, y: 0.005345362, z: 0.024597192}
+  m_Size: {x: 0.036201764, y: 0.002345362, z: 0.024597192}
   m_Center: {x: -0.015398444, y: 0, z: 0.00964843}
 --- !u!23 &11464006
 MeshRenderer:
@@ -230,8 +230,8 @@ GameObject:
   m_Name: rock1 (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &22007546
 Transform:
@@ -650,8 +650,8 @@ GameObject:
   m_Name: rock2 (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &86130206
 Transform:
@@ -5903,8 +5903,8 @@ GameObject:
   m_Name: Cube.007 (31)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &223102317
 Transform:
@@ -5931,7 +5931,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.03415621, y: 0.005345362, z: 0.024597192}
+  m_Size: {x: 0.03415621, y: 0.002345362, z: 0.024597192}
   m_Center: {x: -0.016421221, y: 0, z: 0.00964843}
 --- !u!23 &223102319
 MeshRenderer:
@@ -6413,8 +6413,8 @@ GameObject:
   m_Name: rock2 (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &280320465
 Transform:
@@ -6822,8 +6822,8 @@ GameObject:
   m_Name: rock2 (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &366953255
 Transform:
@@ -7653,8 +7653,8 @@ GameObject:
   m_Name: rock1 (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &491784080
 Transform:
@@ -7746,8 +7746,8 @@ GameObject:
   m_Name: Cube.006 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &501956119
 Transform:
@@ -7774,7 +7774,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.036201764, y: 0.005345362, z: 0.024597192}
+  m_Size: {x: 0.036201764, y: 0.002345362, z: 0.024597192}
   m_Center: {x: -0.015398444, y: 0, z: 0.00964843}
 --- !u!23 &501956121
 MeshRenderer:
@@ -8206,8 +8206,8 @@ GameObject:
   m_Name: rock1 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &584253111
 Transform:
@@ -8299,8 +8299,8 @@ GameObject:
   m_Name: rock3 (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &591472361
 Transform:
@@ -8482,8 +8482,8 @@ GameObject:
   m_Name: Cube.007 (14)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &600719648
 Transform:
@@ -8510,7 +8510,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.03415621, y: 0.005345362, z: 0.024597192}
+  m_Size: {x: 0.03415621, y: 0.002345362, z: 0.024597192}
   m_Center: {x: -0.016421221, y: 0, z: 0.00964843}
 --- !u!23 &600719650
 MeshRenderer:
@@ -8755,8 +8755,8 @@ GameObject:
   m_Name: rock3 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &616659727
 Transform:
@@ -8938,8 +8938,8 @@ GameObject:
   m_Name: rock1 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &661567513
 Transform:
@@ -9222,8 +9222,8 @@ GameObject:
   m_Name: rock2 (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &685570058
 Transform:
@@ -9473,8 +9473,8 @@ GameObject:
   m_Name: rock2 (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &729014014
 Transform:
@@ -9724,8 +9724,8 @@ GameObject:
   m_Name: rock3 (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &765994072
 Transform:
@@ -9970,40 +9970,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 772331840}
   m_Mesh: {fileID: 8279230708524882657, guid: 7fb9434ba0c2bb349a73c7d9aa36289a, type: 3}
---- !u!1 &811245137 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7506547063061852351, guid: 36b0d72e322574598b6d0cf6709a3048,
-    type: 3}
-  m_PrefabInstance: {fileID: 469245166}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &811245139
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 811245137}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65ee9ba50281f49fc978d764613fe987, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_spawnTimer: {fileID: 811245140}
---- !u!114 &811245140
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 811245137}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 358b7d333b0171a45a6fbfd5204f2b07, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentTime: 0
-  startingTime: 0.5
-  m_isCounting: 0
 --- !u!1 &835701723
 GameObject:
   m_ObjectHideFlags: 0
@@ -10437,8 +10403,8 @@ GameObject:
   m_Name: rock3 (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &913900505
 Transform:
@@ -10530,8 +10496,8 @@ GameObject:
   m_Name: rock1 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &927288226
 Transform:
@@ -11182,8 +11148,8 @@ GameObject:
   m_Name: rock2 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1031787830
 Transform:
@@ -16029,8 +15995,8 @@ GameObject:
   m_Name: Cube.007 (26)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1071177837
 Transform:
@@ -16291,8 +16257,8 @@ GameObject:
   m_Name: rock3 (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1138159497
 Transform:
@@ -16726,8 +16692,8 @@ GameObject:
   m_Name: rock2 (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1201110307
 Transform:
@@ -16819,8 +16785,8 @@ GameObject:
   m_Name: Cube.007 (25)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1202909550
 Transform:
@@ -16912,8 +16878,8 @@ GameObject:
   m_Name: Cube.007 (39)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1217112558
 Transform:
@@ -16940,7 +16906,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.03415621, y: 0.005345362, z: 0.024597192}
+  m_Size: {x: 0.03415621, y: 0.002345362, z: 0.024597192}
   m_Center: {x: -0.016421221, y: 0, z: 0.00964843}
 --- !u!23 &1217112560
 MeshRenderer:
@@ -17321,8 +17287,8 @@ GameObject:
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!65 &1283281009
 BoxCollider:
@@ -17414,8 +17380,8 @@ GameObject:
   m_Name: Cube.007 (32)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1311024310
 Transform:
@@ -17442,7 +17408,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.03415621, y: 0.005345362, z: 0.024597192}
+  m_Size: {x: 0.03415621, y: 0.002345362, z: 0.024597192}
   m_Center: {x: -0.016421221, y: 0, z: 0.00964843}
 --- !u!23 &1311024312
 MeshRenderer:
@@ -17848,8 +17814,8 @@ GameObject:
   m_Name: rock2 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1365020840
 Transform:
@@ -18101,6 +18067,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 64eaa3902c5f2da4b9637a1de7a469aa,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 64eaa3902c5f2da4b9637a1de7a469aa, type: 3}
 --- !u!1 &1416039466
@@ -18119,8 +18090,8 @@ GameObject:
   m_Name: rock2 (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1416039467
 Transform:
@@ -18207,6 +18178,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Main_Game_UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 5992467921213363750, guid: d282672858d9b4d4c92f04d6b588eb5f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5992467921213363754, guid: d282672858d9b4d4c92f04d6b588eb5f,
         type: 3}
@@ -18959,8 +18935,8 @@ GameObject:
   m_Name: Cube.007 (17)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1575455367
 Transform:
@@ -18987,7 +18963,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.03415621, y: 0.005345362, z: 0.024597192}
+  m_Size: {x: 0.03415621, y: 0.002345362, z: 0.024597192}
   m_Center: {x: -0.016421221, y: 0, z: 0.00964843}
 --- !u!23 &1575455369
 MeshRenderer:
@@ -19694,8 +19670,8 @@ GameObject:
   m_Name: Cube.006 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1627940203
 Transform:
@@ -19722,7 +19698,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.036201764, y: 0.005345362, z: 0.024597192}
+  m_Size: {x: 0.036201764, y: 0.002345362, z: 0.024597192}
   m_Center: {x: -0.015398444, y: 0, z: 0.00964843}
 --- !u!23 &1627940205
 MeshRenderer:
@@ -20143,8 +20119,8 @@ GameObject:
   m_Name: rock2 (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1670619141
 Transform:
@@ -20315,8 +20291,8 @@ GameObject:
   m_Name: Cube.006 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1705042995
 Transform:
@@ -20343,7 +20319,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.036201764, y: 0.005345362, z: 0.024597192}
+  m_Size: {x: 0.036201764, y: 0.002345362, z: 0.024597192}
   m_Center: {x: -0.015398444, y: 0, z: 0.00964843}
 --- !u!23 &1705042997
 MeshRenderer:
@@ -20408,8 +20384,8 @@ GameObject:
   m_Name: rock1 (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1735704641
 Transform:
@@ -21077,8 +21053,8 @@ GameObject:
   m_Name: Cube.007 (15)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1890765561
 Transform:
@@ -21105,7 +21081,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.03415621, y: 0.005345362, z: 0.024597192}
+  m_Size: {x: 0.03415621, y: 0.002345362, z: 0.024597192}
   m_Center: {x: -0.016421221, y: 0, z: 0.00964843}
 --- !u!23 &1890765563
 MeshRenderer:
@@ -21819,8 +21795,8 @@ GameObject:
   m_Name: rock2 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1932466884
 Transform:
@@ -21912,8 +21888,8 @@ GameObject:
   m_Name: Cube.007 (40)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1933646910
 Transform:
@@ -21940,7 +21916,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.03415621, y: 0.005345362, z: 0.024597192}
+  m_Size: {x: 0.03415621, y: 0.002345362, z: 0.024597192}
   m_Center: {x: -0.016421221, y: 0, z: 0.00964843}
 --- !u!23 &1933646912
 MeshRenderer:
@@ -22255,8 +22231,8 @@ GameObject:
   m_Name: rock3 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &2027812678
 Transform:
@@ -22427,8 +22403,8 @@ GameObject:
   m_Name: rock3 (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &2087475431
 Transform:
@@ -22520,8 +22496,8 @@ GameObject:
   m_Name: Cube.007 (16)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &2091193876
 Transform:
@@ -22548,7 +22524,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.03415621, y: 0.005345362, z: 0.024597192}
+  m_Size: {x: 0.03415621, y: 0.002345362, z: 0.024597192}
   m_Center: {x: -0.016421221, y: 0, z: 0.00964843}
 --- !u!23 &2091193878
 MeshRenderer:
@@ -23150,6 +23126,80 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1001 &912947732712363748
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3018728612531892701, guid: ad129729338be424e8f689c524511d8d,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 3018728612531892701, guid: ad129729338be424e8f689c524511d8d,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 3018728612531892701, guid: ad129729338be424e8f689c524511d8d,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 3018728612531892701, guid: ad129729338be424e8f689c524511d8d,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.29
+      objectReference: {fileID: 0}
+    - target: {fileID: 3018728612531892701, guid: ad129729338be424e8f689c524511d8d,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3018728612531892701, guid: ad129729338be424e8f689c524511d8d,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3018728612531892701, guid: ad129729338be424e8f689c524511d8d,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3018728612531892701, guid: ad129729338be424e8f689c524511d8d,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3018728612531892701, guid: ad129729338be424e8f689c524511d8d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3018728612531892701, guid: ad129729338be424e8f689c524511d8d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3018728612531892701, guid: ad129729338be424e8f689c524511d8d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3018728612531892707, guid: ad129729338be424e8f689c524511d8d,
+        type: 3}
+      propertyPath: m_Name
+      value: Bot1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7248297610455652700, guid: ad129729338be424e8f689c524511d8d,
+        type: 3}
+      propertyPath: camTransform
+      value: 
+      objectReference: {fileID: 1924878238}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ad129729338be424e8f689c524511d8d, type: 3}
 --- !u!1 &968253390276150631
 GameObject:
   m_ObjectHideFlags: 0
@@ -23166,8 +23216,8 @@ GameObject:
   m_Name: rock2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!65 &968253390276150632
 BoxCollider:
@@ -23590,8 +23640,8 @@ GameObject:
   m_Name: Cube.006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!65 &3565404410486259312
 BoxCollider:
@@ -23652,8 +23702,8 @@ GameObject:
   m_Name: Cube.007
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!65 &3884201098083827353
 BoxCollider:
@@ -23737,8 +23787,8 @@ GameObject:
   m_Name: stump
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!65 &4383886215371096791
 BoxCollider:
@@ -24071,8 +24121,8 @@ GameObject:
   m_Name: Cube.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!65 &6704408248672734570
 BoxCollider:
@@ -24328,8 +24378,8 @@ GameObject:
   m_Name: rock1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!65 &7886192542449279562
 BoxCollider:
@@ -24480,8 +24530,8 @@ GameObject:
   m_Name: rock3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!65 &8548904471038573885
 BoxCollider:
@@ -24526,7 +24576,7 @@ GameObject:
   m_Name: log
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!65 &8939330406485862113
