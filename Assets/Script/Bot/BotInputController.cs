@@ -92,29 +92,36 @@ public class BotInputController : MonoBehaviour, IPlayerInputController
             {
                 Vector3 flattened_pos = m_cachedTransform.position;
                 flattened_pos.y = m_currentPath.corners[m_pathIdx].y;
-                float distnce_sqr = (m_currentPath.corners[m_pathIdx] - flattened_pos).sqrMagnitude;
+                Vector3 direction = (m_currentPath.corners[m_pathIdx] - flattened_pos);
+                float distnce_sqr = direction.sqrMagnitude;
 
-                if (m_currentPath.corners[m_pathIdx].x < m_cachedTransform.position.x)
-                {
-                    m_inputMovementAxis.x = -1.0f;
-                }
-                else if (m_currentPath.corners[m_pathIdx].x > m_cachedTransform.position.x)
-                {
-                    m_inputMovementAxis.x = 1.0f;
-                }
+                //if (m_currentPath.corners[m_pathIdx].x < m_cachedTransform.position.x)
+                //{
+                //    m_inputMovementAxis.x = -1.0f;
+                //}
+                //else if (m_currentPath.corners[m_pathIdx].x > m_cachedTransform.position.x)
+                //{
+                //    m_inputMovementAxis.x = 1.0f;
+                //}
 
-                if (m_currentPath.corners[m_pathIdx].z < m_cachedTransform.position.z)
-                {
-                    m_inputMovementAxis.y = -1.0f;
-                }
-                else if (m_currentPath.corners[m_pathIdx].z > m_cachedTransform.position.z)
-                {
-                    m_inputMovementAxis.y = 1.0f;
-                }
+                //if (m_currentPath.corners[m_pathIdx].z < m_cachedTransform.position.z)
+                //{
+                //    m_inputMovementAxis.y = -1.0f;
+                //}
+                //else if (m_currentPath.corners[m_pathIdx].z > m_cachedTransform.position.z)
+                //{
+                //    m_inputMovementAxis.y = 1.0f;
+                //}
 
                 if (distnce_sqr <= m_waypointDistanceThreshold * m_waypointDistanceThreshold)
                 {
                     ++m_pathIdx;
+                }
+                else
+                {
+                    Vector3 normalised = direction.normalized;
+                    m_inputMovementAxis.x = normalised.x;
+                    m_inputMovementAxis.y = normalised.z;
                 }
             }
             else
@@ -143,15 +150,19 @@ public class BotInputController : MonoBehaviour, IPlayerInputController
             return;
         }
 
-        if (m_currentPath != null)
+        if (m_currentPath != null && m_currentPath.corners.Length > 0)
         {
             Gizmos.color = Color.green;
             //int points_left = m_pathIdx;
 
-            for (int i = m_pathIdx; i < m_currentPath.corners.Length - 1; ++i)
+            Vector3 from = m_cachedTransform.position;
+            from.y = m_currentPath.corners[0].y;
+            for (int i = m_pathIdx; i < m_currentPath.corners.Length; ++i)
             {
-                Vector3 direction = m_currentPath.corners[i + 1] - m_currentPath.corners[i];
-                Gizmos.DrawRay(m_currentPath.corners[i], direction);
+                Vector3 direction = m_currentPath.corners[i] - from;
+                Gizmos.DrawRay(from, direction);
+
+                from = m_currentPath.corners[i];
             }
         }
     }
