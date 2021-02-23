@@ -9,6 +9,8 @@ public class showtutorial : MonoBehaviour
     public GameObject menuobject;
     public GameObject tutobject;
 
+    public bool menuActive = false;
+
     void Start()
     {
         
@@ -20,14 +22,30 @@ public class showtutorial : MonoBehaviour
         if (Input.GetKeyDown("space"))
         { 
            print("info");
+           //menuobject.active = false;
+           //tutobject.active = true;
+            menuActive = !menuActive;
+
+
+        }else if (Input.GetKeyUp("space"))
+        {
+           // menuobject.active = true;
+           // tutobject.active = false;
+        }
+
+        if (menuActive == true)
+        { 
+           //print("info");
            menuobject.active = false;
            tutobject.active = true;
 
-        }else if (Input.GetKeyUp("space"))
+        }else if (menuActive == false)
         {
             menuobject.active = true;
             tutobject.active = false;
         }
+
+        //menuActive
 
     }
 }
