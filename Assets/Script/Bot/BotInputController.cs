@@ -1,9 +1,9 @@
-﻿using System.Collections;
+﻿using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class BotInputController : MonoBehaviour, IPlayerInputController
+public class BotInputController : MonoBehaviour, IPlayerInputController, IArtifactCollector
 {
     private Vector2 m_inputMovementAxis = Vector2.zero;
 
@@ -36,6 +36,17 @@ public class BotInputController : MonoBehaviour, IPlayerInputController
     [SerializeField]
     private float m_digTime = 6.0f;
     private float m_currentDigTime = 0.0f;
+    private bool m_isDigging = false;
+
+    [SerializeField]
+    private List<DigZone> m_detectedDigZones = new List<DigZone>();
+    [SerializeField]
+    private DigZone m_currentDigZone = null;
+
+    [SerializeField]
+    private float m_botReactionTime = 0.2f;
+    [SerializeField]
+    private float m_reactionTimer = 0.2f;
 
     private void ResetInputs()
     {
@@ -47,8 +58,8 @@ public class BotInputController : MonoBehaviour, IPlayerInputController
     private void SelectRandomDigZoneTarget()
     {
         int new_target_idx = Random.Range(0, m_digZones.Length);
-
-        SetTargetDigZone(m_digZones[new_target_idx].transform);
+        m_currentDigZone = m_digZones[new_target_idx];
+        SetTargetDigZone(m_currentDigZone.transform);
     }
 
     private void SetTargetDigZone(Transform target)
@@ -79,6 +90,8 @@ public class BotInputController : MonoBehaviour, IPlayerInputController
         m_cachedTransform = transform;
         m_digZones = FindObjectsOfType<DigZone>();
         ResetInputs();
+
+        GameController.Instance().OnArtifactDetected += AddDetectedArtifactZone;
     }
 
     // Update is called once per frame
@@ -95,24 +108,6 @@ public class BotInputController : MonoBehaviour, IPlayerInputController
                 Vector3 direction = (m_currentPath.corners[m_pathIdx] - flattened_pos);
                 float distnce_sqr = direction.sqrMagnitude;
 
-                //if (m_currentPath.corners[m_pathIdx].x < m_cachedTransform.position.x)
-                //{
-                //    m_inputMovementAxis.x = -1.0f;
-                //}
-                //else if (m_currentPath.corners[m_pathIdx].x > m_cachedTransform.position.x)
-                //{
-                //    m_inputMovementAxis.x = 1.0f;
-                //}
-
-                //if (m_currentPath.corners[m_pathIdx].z < m_cachedTransform.position.z)
-                //{
-                //    m_inputMovementAxis.y = -1.0f;
-                //}
-                //else if (m_currentPath.corners[m_pathIdx].z > m_cachedTransform.position.z)
-                //{
-                //    m_inputMovementAxis.y = 1.0f;
-                //}
-
                 if (distnce_sqr <= m_waypointDistanceThreshold * m_waypointDistanceThreshold)
                 {
                     ++m_pathIdx;
@@ -127,16 +122,71 @@ public class BotInputController : MonoBehaviour, IPlayerInputController
             else
             {
                 m_targetPoint = null;
-                m_currentDigTime = m_digTime;
-                DigPressed = true;
+
+                if (m_currentDigZone.HasArtifact == true)
+                {
+                    m_currentDigTime = m_digTime;
+                    DigPressed = true;
+                    m_isDigging = true;
+                }
+            }
+        }
+        else if (m_currentDigZone != null)
+        {
+            m_currentDigTime -= Time.deltaTime;
+            if (m_currentDigTime <= 0.0f || m_currentDigZone.HasArtifact == false)
+            {
+                DigReleased = true;
+                m_currentDigZone = null;
+                m_isDigging = false;
+            }
+        }
+
+        m_reactionTimer -= Time.deltaTime;
+        if (m_reactionTimer <= 0.0f)
+        {
+            CheckForBestTarget();
+            m_reactionTimer = m_botReactionTime;
+        }
+    }
+
+    private void CheckForBestTarget()
+    {
+        if (m_isDigging == true)
+        {
+            return;
+        }
+
+        if (m_detectedDigZones.Any() == false)
+        {
+            if (m_currentDigZone == null)
+            {
+                SelectRandomDigZoneTarget();
             }
         }
         else
         {
-            m_currentDigTime -= Time.deltaTime;
-            if (m_currentDigTime <= 0.0f)
+            m_detectedDigZones.Sort(delegate (DigZone x, DigZone y)
             {
-                DigReleased = true;
+                if (x.CurrentArtifact == null && y.CurrentArtifact == null) return 0;
+                else if (x.CurrentArtifact == null) return 1;
+                else if (y.CurrentArtifact == null) return -1;
+                else if (x.CurrentArtifact.CorrectScore == y.CurrentArtifact.CorrectScore) return 0;
+                else return x.CurrentArtifact.CorrectScore > y.CurrentArtifact.CorrectScore ? -1 : 1;
+            });
+
+            if (m_detectedDigZones[0].HasArtifact == true)
+            {
+                if (m_currentDigZone == null
+                || m_currentDigZone.HasArtifact == false
+                || m_currentDigZone.CurrentArtifact.CorrectScore < m_detectedDigZones[0].CurrentArtifact.CorrectScore)
+                {
+                    m_currentDigZone = m_detectedDigZones[0];
+                    SetTargetDigZone(m_currentDigZone.transform);
+                }
+            }
+            else
+            {
                 SelectRandomDigZoneTarget();
             }
         }
@@ -186,5 +236,30 @@ public class BotInputController : MonoBehaviour, IPlayerInputController
         }
 
         GUILayout.EndVertical();
+    }
+
+    public void OnArtifactCollected(ArtifactItemData artifact)
+    {
+        GameController.Instance().CollectedArtifact(artifact, false);
+    }
+
+    public void AddDetectedArtifactZone(DigZone zone)
+    {
+        if (m_detectedDigZones.Contains(zone) == false)
+        {
+            m_detectedDigZones.Add(zone);
+            zone.OnArtifactTaken += RemoveTakenArtifactZone;
+        }
+    }
+
+    public void RemoveTakenArtifactZone(DigZone zone)
+    {
+        zone.OnArtifactTaken -= RemoveTakenArtifactZone;
+        m_detectedDigZones.Remove(zone);
+
+        if (m_currentDigZone == zone)
+        {
+            m_targetPoint = null;
+        }
     }
 }

@@ -7,6 +7,9 @@ public class GameController : MonoBehaviour
     public delegate void ArtifactTypeWantedChanged(ArtifactItemType type);
     public event ArtifactTypeWantedChanged OnArtifactTypeWantedChanged = delegate { };
 
+    public delegate void ArtifactDetectedEvent(DigZone zone);
+    public event ArtifactDetectedEvent OnArtifactDetected = delegate { };
+
     public delegate void LevelEnd();
     public event LevelEnd OnLevelEnd = delegate { };
 
@@ -68,15 +71,23 @@ public class GameController : MonoBehaviour
         RollNewArtefactType();
     }
 
-    public void CollectedArtifact(ArtifactItemData artifact)
+    public void ArtifactDetected(DigZone zone)
     {
-        if (artifact.ItemType == m_currentArtifactRequest)
+        OnArtifactDetected(zone);
+    }
+
+    public void CollectedArtifact(ArtifactItemData artifact, bool scoreArtifact)
+    {
+        if (scoreArtifact == true)
         {
-            m_levelScore += artifact.CorrectScore;
-        }
-        else
-        {
-            m_levelScore += artifact.IncorrectScore;
+            if (artifact.ItemType == m_currentArtifactRequest)
+            {
+                m_levelScore += artifact.CorrectScore;
+            }
+            else
+            {
+                m_levelScore += artifact.IncorrectScore;
+            }
         }
 
         // remove the collected artifact fromour list

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerInputController : MonoBehaviour, IPlayerInputController
+public class PlayerInputController : MonoBehaviour, IPlayerInputController, IArtifactCollector
 {
     [SerializeField]
     private InputMapping m_inputMap = null;
@@ -69,5 +69,11 @@ public class PlayerInputController : MonoBehaviour, IPlayerInputController
         {
             DigPressed = true;
         }
+    }
+
+    public void OnArtifactCollected(ArtifactItemData artifact)
+    {
+        // score artifact
+        GameController.Instance().CollectedArtifact(artifact, true);
     }
 }

@@ -80,7 +80,12 @@ public class PlayerDigController : MonoBehaviour
         {
             // award score
             ArtifactItemData artifact = m_activeDigZone.TakeArtifact();
-            GameController.Instance().CollectedArtifact(artifact);
+            IArtifactCollector collector = GetComponent<IArtifactCollector>();
+
+            if (collector != null)
+            {
+                collector.OnArtifactCollected(artifact);
+            }
         }
     }
 }

@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class DigZone : MonoBehaviour
 {
+    public delegate void ArtifactTakenEvent(DigZone zone);
+    public event ArtifactTakenEvent OnArtifactTaken = delegate { };
+
     [SerializeField]
     private Transform m_artifactSpawnPoint;
 
     public Transform ArtifactSpawnPoint { get { return m_artifactSpawnPoint; } }
 
     private ArtifactItemData m_artifact = null;
+
+    public ArtifactItemData CurrentArtifact { get { return m_artifact; } }
 
     public bool HasArtifact { get { return m_artifact != null; } }
 
@@ -22,6 +27,9 @@ public class DigZone : MonoBehaviour
     {
         ArtifactItemData artifact = m_artifact;
         m_artifact = null;
+
+        OnArtifactTaken(this);
+
         return artifact;
     }
 
@@ -48,6 +56,7 @@ public class DigZone : MonoBehaviour
             {
                 Debug.Log("Enabling Detected visual");
                 m_artifact.DetectedVisualController.enabled = true;
+                GameController.Instance().ArtifactDetected(this);
             }
         }
     }
