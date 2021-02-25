@@ -6,8 +6,15 @@ using UnityEngine.SceneManagement;
 public class mainMenuNextScene : MonoBehaviour
 {
     // Start is called before the first frame update
-    
+
     public int playerCount;
+
+    public TMPro.TMP_Text bot_text_ui = null;
+
+    [SerializeField]
+    private string bot_enabled_text = "Bots Enabled";
+    [SerializeField]
+    private string bot_disabled_text = "Bots Disabled";
 
     void Start()
     {
@@ -46,6 +53,16 @@ public class mainMenuNextScene : MonoBehaviour
             //SceneManager.LoadScene("MainGame");
             //set playes =2
             //playerCount = 3;
+        }
+
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            GameSettings.EnableAI = !GameSettings.EnableAI;
+
+            if (bot_text_ui != null)
+            {
+                bot_text_ui.text = GameSettings.EnableAI ? bot_enabled_text : bot_disabled_text;
+            }
         }
     }
 //public void SetGamePlayerCount(int players)

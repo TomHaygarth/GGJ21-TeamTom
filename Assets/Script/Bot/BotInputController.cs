@@ -87,11 +87,18 @@ public class BotInputController : MonoBehaviour, IPlayerInputController, IArtifa
     // Start is called before the first frame update
     void Start()
     {
-        m_cachedTransform = transform;
-        m_digZones = FindObjectsOfType<DigZone>();
-        ResetInputs();
+        if (GameSettings.EnableAI == false)
+        {
+            gameObject.SetActive(false);
+        }
+        else
+        {
+            m_cachedTransform = transform;
+            m_digZones = FindObjectsOfType<DigZone>();
+            ResetInputs();
 
-        GameController.Instance().OnArtifactDetected += AddDetectedArtifactZone;
+            GameController.Instance().OnArtifactDetected += AddDetectedArtifactZone;
+        }
     }
 
     // Update is called once per frame
@@ -217,27 +224,6 @@ public class BotInputController : MonoBehaviour, IPlayerInputController, IArtifa
         }
     }
 
-    void OnGUI()
-    {
-        if(UnityEditor.Selection.activeTransform != m_cachedTransform)
-        {
-            return;
-        }
-
-        GUILayout.BeginVertical();
-
-        if (GUILayout.Button("Rebuild path"))
-        {
-            SetTargetDigZone(m_targetPoint);
-        }
-        if (GUILayout.Button("Select new dig zone"))
-        {
-            SelectRandomDigZoneTarget();
-        }
-
-        GUILayout.EndVertical();
-    }
-
     public void OnArtifactCollected(ArtifactItemData artifact)
     {
         GameController.Instance().CollectedArtifact(artifact, false);
@@ -262,4 +248,27 @@ public class BotInputController : MonoBehaviour, IPlayerInputController, IArtifa
             m_targetPoint = null;
         }
     }
+
+#if UNITY_EDITOR
+    void OnGUI()
+    {
+        if (UnityEditor.Selection.activeTransform != m_cachedTransform)
+        {
+            return;
+        }
+
+        GUILayout.BeginVertical();
+
+        if (GUILayout.Button("Rebuild path"))
+        {
+            SetTargetDigZone(m_targetPoint);
+        }
+        if (GUILayout.Button("Select new dig zone"))
+        {
+            SelectRandomDigZoneTarget();
+        }
+
+        GUILayout.EndVertical();
+    }
+#endif
 }
