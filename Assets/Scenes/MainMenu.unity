@@ -23741,6 +23741,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCount: 0
   bot_text_ui: {fileID: 2105172100}
+  bot_enabled_text: Bots Enabled
+  bot_disabled_text: Bots Disabled
 --- !u!1 &1925302115
 GameObject:
   m_ObjectHideFlags: 0
