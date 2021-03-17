@@ -1,11 +1,143 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
+
+#if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
 using SpeechLib;
+#endif
 
 using System.Collections.Generic;
 
 namespace LowteckTTS
 {
+#if UNITY_EDITOR_OSX || UNITY_STANDALONE_OSX
+    public class TTS : MonoBehaviour
+    {
+        public enum ttsVoices { Male, Female };
+
+        private int ttsVolume = 100;
+        private int ttsRate = 0;
+        private int ttsVoice = 0;
+
+        public class ttsVoiceSelect
+        {
+            public string description;
+            public int id;
+
+            public ttsVoiceSelect(string description, int id)
+            {
+                this.description = description;
+                this.id = id;
+            }
+        }
+
+        private List<ttsVoiceSelect> voiceDescriptions = new List<ttsVoiceSelect>();
+
+        void Awake()
+        {
+            AppleSpeech.CreateSpeech();
+            voiceDescriptions.Add(new ttsVoiceSelect("Default voice", 0));
+        }
+
+        private void OnDestroy()
+        {
+            AppleSpeech.DestroySpeech();
+        }
+
+        /**
+         * getInstalledVoices will return a list of installed system voices, which can be selected for voice output
+         * */
+        public List<ttsVoiceSelect> getInstalledVoices()
+        {
+
+            return voiceDescriptions;
+        }
+
+        /**playTTS will trigger the TTS system to speak the provided text using the set volume, rate and voice 
+        */
+        public void playTTS(string text)
+        {
+            AppleSpeech.Speak(text);
+        }
+
+
+        /**setTTSVoice sets the TTS Voice to the provided voice id
+         */
+        public void setTTSVoice(int id)
+        {
+            // TODO
+        }
+        /**setTTSVoice sets the TTS Voice to the provided voice type
+       */
+        public void setTTSVoice(ttsVoices newTTSVoice)
+        {
+            // TODO
+        }
+
+        /**setTTSRate sets the rate of the TTS 
+         * parameter newTTSRate should be from -5 for very slow to 5 to very fast, with 0 being normal rate
+       */
+        public void setTTSRate(int newTTSRate)
+        {
+            //TODO
+        }
+
+        /**setTTSVolume sets the rate of the TTS 
+        * parameter newTTSVolume should be from 1 for very quiet to 100 for normal
+        * a volume of 0 will mute the speech
+        */
+        public void setTTSVolume(int newTTSVolume)
+        {
+            // TODO
+        }
+
+        /**
+         * pauseSpeech will pause the current speech being played
+         */
+        public void pauseSpeech()
+        {
+            Debug.Log("Pausing..." + isSpeaking());
+            if (isSpeaking())
+                AppleSpeech.Pause();
+        }
+        /**
+         * resumeSpeech will resume any speech currently paused
+         */
+        public void resumeSpeech()
+        {
+            Debug.Log("Resuming..." + isSpeaking());
+            if (!isSpeaking())
+                AppleSpeech.Resume();
+        }
+
+        /**
+         * skipToNextSentence will skip to the next sentence in the text currently being spoken
+         */
+        public void skipToNextSentence()
+        {
+            Debug.Log("Skipping..." + isSpeaking());
+        }
+
+        /**
+         * skipToPreviousSentence will skip to the previous sentence in the text currently being spoken
+         */
+        public void skipToPreviousSentence()
+        {
+            Debug.Log("Skipping..." + isSpeaking());
+        }
+
+        /**
+         * skipToEnd will skip to the end of the text spoken
+         */
+        public void skipToEnd()
+        {
+            //TODO
+        }
+
+        public bool isSpeaking()
+        {
+            return AppleSpeech.IsSpeaking();
+        }
+    }
+#else
     public class TTS : MonoBehaviour
     {
         public enum ttsVoices { Male, Female };
@@ -197,4 +329,5 @@ namespace LowteckTTS
             return (spVoice.Status.RunningState == SpeechRunState.SRSEIsSpeaking);
         }
     }
+#endif
 }
