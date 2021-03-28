@@ -13,7 +13,7 @@ namespace Dislectek
         public static bool optionsActive = false;
         Dropdown dropdown_;
         //bool talkOnExitToggle;
-        List<TTS.ttsVoiceSelect> voice_list;
+        List<ttsVoiceSelect> voice_list;
 
         
         public void Start()
@@ -30,6 +30,16 @@ namespace Dislectek
                 str_ls.Add(l.description);
             //print(str_ls.Count);
             dropdown_.AddOptions(str_ls);
+
+            int currentVoiceId = parentTTS.GetCurrentVoiceID();
+            if (currentVoiceId >= 0)
+            {
+                dropdown_.SetValueWithoutNotify(currentVoiceId);
+            }
+            else
+            {
+                Debug.LogWarning("Dislectek: Tried to get the current voice ID but it appears invalid");
+            }
 
             //grab TTS_interface
         }
